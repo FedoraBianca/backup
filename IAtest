@@ -1,0 +1,25 @@
+x=[0 0 1 1 ; 0 1 0 1 ];
+tAnd=[0 0 0 1];
+tXor=[0 1 1 0];
+
+net1=perceptron;
+net1=configure(net1,x,tAnd);
+net1.trainParam.epochs=20;
+net1=train(net1,x,tAnd);
+
+net2=perceptron;
+net2=configure(net2,x,tXor);
+net2.trainParam.epochs=20;
+net2=train(net2,x,tXor);
+
+figure(1)
+subplot(1,2,1)
+plotpv(x,tAnd);
+hold on
+plotpc(net1.IW{1,1},net1.b{1})
+hold off
+subplot(1,2,2)
+plotpv(x,tXor);
+hold on
+plotpc(net2.IW{1,1},net2.b{1})
+hold off
